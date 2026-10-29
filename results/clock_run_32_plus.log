@@ -1,0 +1,13 @@
+KNOWN n=32 a(n)=51 | below: INFEASIBLE over all 31 values of p1, 47 nodes, 0 s this run | witness at f(n): permutation=True, max triple sum 51, f(n)=51 OK
+KNOWN n=33 a(n)=53 | below: INFEASIBLE over all 32 values of p1, 1342188393 nodes, 77 s this run | witness at f(n): permutation=True, max triple sum 53, f(n)=53 OK
+KNOWN n=34 a(n)=54 | below: INFEASIBLE over all 33 values of p1, 50 nodes, 0 s this run | witness at f(n): permutation=True, max triple sum 54, f(n)=54 OK
+KNOWN n=35 a(n)=56 | below: INFEASIBLE over all 34 values of p1, 761638107 nodes, 32 s this run | witness at f(n): permutation=True, max triple sum 56, f(n)=56 OK
+KNOWN n=36 a(n)=57 | below: INFEASIBLE over all 35 values of p1, 673501 nodes, 0 s this run | witness at f(n): permutation=True, max triple sum 57, f(n)=57 OK
+KNOWN n=37 a(n)=59 | below: INFEASIBLE over all 36 values of p1, 2318604109 nodes, 100 s this run | witness at f(n): permutation=True, max triple sum 59, f(n)=59 OK
+KNOWN n=38 a(n)=60 | below: INFEASIBLE over all 37 values of p1, 56 nodes, 0 s this run | witness at f(n): permutation=True, max triple sum 60, f(n)=60 OK
+NEW n=39 f(n)=62 | at f(n)-1: INFEASIBLE over all 38 values of p1, 41023924588 nodes, 2059 s this run [2059 s] | witness: permutation=True, max triple sum 62, f(n)=62 OK
+NEW n=40 f(n)=63 | at f(n)-1: INFEASIBLE over all 39 values of p1, 59 nodes, 0 s this run [0 s] | witness: permutation=True, max triple sum 63, f(n)=63 OK
+NEW n=41 f(n)=65 | at f(n)-1: INFEASIBLE over all 40 values of p1, 19918534245 nodes, 729 s this run [729 s] | witness: permutation=True, max triple sum 65, f(n)=65 OK
+NEW n=42 f(n)=66 | at f(n)-1: INFEASIBLE over all 41 values of p1, 4246764 nodes, 0 s this run [0 s] | witness: permutation=True, max triple sum 66, f(n)=66 OK
+NEW n=43 f(n)=68 | at f(n)-1: INFEASIBLE over all 42 values of p1, 56566535930 nodes, 1613 s this run [1613 s] | witness: permutation=True, max triple sum 68, f(n)=68 OK
+NEW n=44 f(n)=69 | at f(n)-1: INFEASIBLE over all 43 values of p1, 65 nodes, 0 s this run [0 s] | witness: permutation=True, max triple sum 69, f(n)=69 OK

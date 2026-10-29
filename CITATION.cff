@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this note, code or data, please cite it as below."
+title: "Small maximal k-consecutive sums on a circle and the clock-face problem"
+authors:
+  - family-names: "Nagib"
+    given-names: "Victor Nidal Bassem"
+date-released: 2026-10-30
+version: "1.0.0"
+url: "https://github.com/victornagib2/clockface-ksums"
+repository-code: "https://github.com/victornagib2/clockface-ksums"
+license: MIT
+keywords:
+  - OEIS A066385
+  - clock-face problem
+  - circular permutations
+  - consecutive sums
+  - combinatorics
+abstract: >-
+  For odd k and odd m, the smallest possible maximal sum of k consecutive entries of a circular arrangement of
+  1..mk exceeds the average by exactly 1 when m <= k+2 and by exactly 2 when m >= k+4. The lower bound is a
+  total-variation argument valid for all n; the upper bound is an explicit construction. For k = 3 this gives a
+  self-contained proof that the clock-face numbers (OEIS A066385) equal ceiling(3n/2)+3 for all n >= 4 except
+  n = 5, 6, 9, 15.

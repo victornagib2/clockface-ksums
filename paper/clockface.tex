@@ -1,0 +1,370 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1.15in]{geometry}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\msum}{\mathsf{msum}}
+\newcommand{\disc}{\mathsf{disc}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\title{Small maximal $k$-consecutive sums on a circle\\ and the clock-face problem}
+\author{Victor Nidal Bassem Nagib}
+\date{October 30, 2026}
+
+\begin{document}
+
+\begin{abstract}
+Arrange $1,2,\dots,n$ on a circle and let $\msum(n,k)$ be the smallest possible value of the largest sum of $k$
+consecutive entries, minus the average $k(n+1)/2$ of these sums. For odd $k\ge 3$ and odd $m$, Higashitani and
+Kurimoto proved $\msum(mk,k)=2$ for $m\ge 2k+3$, while for $5\le m\le 2k+1$ it was only known that
+$\msum(mk,k)\in\{1,2\}$, apart from two cases with $k=3$. We show that $\msum(mk,k)=1$ for $3\le m\le k+2$ and $\msum(mk,k)=2$ for
+$m\ge k+4$, which settles this case. The lower bound comes from a short total-variation argument giving, for
+odd $k$, $\msum(n,k)\ge 2$ for every odd $n>(k+3)\gcd(n,k)$; the upper bound is an explicit construction. For
+$k=3$ the argument gives a short proof, with no computer verification, that the clock-face numbers (OEIS A066385)
+are at least $\lceil 3n/2\rceil+3$ for all $n\ge 4$ except $n=5,6,9,15$. With the known matching upper bound this
+gives $a(n)=\lceil 3n/2\rceil+3$ apart from these four exceptions, as conjectured by J.~E.~Schoenfield. This also
+follows from the work of Higashitani and Kurimoto, except for the case $n=21$, which they credit to a personal
+communication and which earlier computer searches had also settled.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $n>k\ge 1$. For a permutation $\pi=(\pi_0,\dots,\pi_{n-1})$ of $[n]=\{1,\dots,n\}$, read cyclically
+($\pi_{i+n}=\pi_i$), let
+\[
+  s_i=s_i(\pi)=\pi_i+\pi_{i+1}+\dots+\pi_{i+k-1}\qquad(i\in\Z_n)
+\]
+be its $k$-consecutive sums. They have average $k(n+1)/2$. Following Higashitani and Kurimoto~\cite{HK} put
+\[
+  \msum(\pi,k)=\max_{i}s_i(\pi)-\frac{k(n+1)}{2},\qquad \msum(n,k)=\min_{\pi}\msum(\pi,k).
+\]
+Since $\max_i s_i$ is an integer at least the average, $\msum(n,k)$ is a non-negative integer when $k(n+1)$ is even
+and lies in $\frac12+\Z$ when $k(n+1)$ is odd. Anstee, Ferguson and Griggs~\cite{AFG} studied the two-sided
+version $\disc(n,k)=\min_\pi\max_i|s_i(\pi)-k(n+1)/2|\ge\msum(n,k)$.
+
+The case $k=3$ is the \emph{clock-face problem}: what is the least possible value $a(n)$ of the largest sum of
+three neighbours when $1,\dots,n$ are placed around a circle? It goes back to Clark~\cite{Clark} and to a 1986
+column of Martin Gardner~\cite{Gardner}, and was studied as a backtracking problem by Rolfe~\cite{Rolfe,RP}. A
+version with $n=12$ was a problem of the Bundeswettbewerb Mathematik 2002~\cite{BWM}: for twelve sticks of lengths
+$1,\dots,12$ in a circle, show that some three neighbours have total length at least $20$. The values are OEIS sequence A066385~\cite{OEIS}, and
+$a(n)=\frac{3(n+1)}{2}+\msum(n,3)$. In 2019 J.~E.~Schoenfield observed there that $a(n)=f(n):=\lceil 3n/2\rceil+3$
+for all $4\le n\le 38$ except $n=5,6,9,15$, gave an explicit arrangement showing $a(n)\le f(n)$ for all $n$,
+noted that $a(n)=f(n)$ is not hard to prove for even $n>6$, and conjectured $a(n)=f(n)$ for all odd $n>15$.
+
+Higashitani and Kurimoto~\cite{HK} determined $\msum(n,k)$ in many cases. Their Corollary~1.6 gives
+$\msum(n,3)=2$ for all odd $n\ge7$ other than $9$ and $15$, which contains Schoenfield's conjecture, except that the value
+$\msum(21,3)=2$ is credited there to a personal communication of T.~Yamashita~\cite[Remark~1.7]{HK}. For odd $k$
+and $n=mk$ with $m$ odd they prove $\msum(mk,k)=2$ for $m\ge 2k+3$~\cite[Theorem~1.1]{HK}, and $\msum(3k,k)=1$
+follows from $\disc(3k,k)=1$~\cite{AFG}. Since $1\le\msum(mk,k)\le\disc(mk,k)\le 2$~\cite{AFG}, the open cases were
+odd $m$ with $5\le m\le 2k+1$, except that for $k=3$ the values $\msum(15,3)=1$ and $\msum(21,3)=2$ were
+known~\cite[Remark~1.7]{HK}.
+
+Our first result is a lower bound for odd $k$ and all $n$.
+
+\begin{theorem}\label{thm:lower}
+Let $k\ge3$ be odd, $n>k$ and $g=\gcd(n,k)$.
+\begin{enumerate}
+\item[(a)] If $n$ is odd and $n>(k+3)g$, then $\msum(n,k)\ge 2$.
+\item[(b)] If $n$ is even and $n\ne 2k$, then $\msum(n,k)\ge 3/2$.
+\end{enumerate}
+\end{theorem}
+
+Part (a) for $n=mk$ says $\msum(mk,k)\ge2$ for odd $m\ge k+4$, improving the range $m\ge 2k+3$
+of~\cite[Lemma~5.3]{HK}. Part (b) is included for completeness; much of it is contained in~\cite{HK} (for $k=3$
+it is part of~\cite[Corollary~1.6(a)]{HK}), and $n=2k$ is a genuine exception, since
+$\msum(2k,k)=\disc(2k,k)=\frac12$~\cite{AFG}. Our second result shows that the bound in (a) is sharp when
+$k\mid n$.
+
+\begin{theorem}\label{thm:construction}
+Let $k\ge1$ and $m\ge3$ be odd with $m\le k+2$. Then there is a permutation of $[mk]$ all of whose
+$k$-consecutive sums are at most $\frac{k(mk+1)}{2}+1$. In other words $\msum(mk,k)\le1$.
+\end{theorem}
+
+\begin{corollary}\label{cor:mk}
+Let $k\ge3$ and $m\ge3$ be odd. Then
+\[
+  \msum(mk,k)=\begin{cases}1,& m\le k+2,\\ 2,& m\ge k+4.\end{cases}
+\]
+\end{corollary}
+
+For instance $\msum(n,5)=1$ for $n=15,25,35$ and $\msum(n,5)=2$ for $n=45,55,65,\dots$; previously the values for
+$n=25,35,45,55$ were open. For $k=3$, together with the known upper bound $a(n)\le\lceil 3n/2\rceil+3$
+\cite{AFG,OEIS}, we obtain the complete answer to the clock-face problem; our proof of the lower bound does not
+depend on any computation.
+
+\begin{corollary}\label{cor:clock}
+For all $n\ge4$,
+\[
+  a(n)=\Bigl\lceil\frac{3n}{2}\Bigr\rceil+3,
+\]
+except $a(5)=10$, $a(6)=11$, $a(9)=16$ and $a(15)=25$, which are one less. (Also $a(3)=6$.)
+\end{corollary}
+
+The four exceptions are exactly the values of $n$ that the inequalities of Theorem~\ref{thm:lower} leave open
+for $k=3$ (namely the odd $n\le 6\gcd(n,3)$, and $n=6$).
+
+\section{Slack and total variation}
+
+Throughout this section $k\ge1$, $n>k$, and $\pi$ is a permutation of $[n]$ whose $k$-consecutive sums satisfy
+$s_i\le L$ for some integer $L$. Put
+\[
+  \sigma_i=L-s_i\ge0,\qquad T=\sum_{i\in\Z_n}\sigma_i=nL-\frac{kn(n+1)}{2},
+\]
+using $\sum_i s_i=k\sum_i\pi_i$. Let
+\begin{gather*}
+  d_i=\sigma_i-\sigma_{i+1}=s_{i+1}-s_i=\pi_{i+k}-\pi_i ,\\
+  M=\sum_{i}\min(\sigma_i,\sigma_{i+1}),\qquad P=\#\{i:\sigma_i>0\text{ and }\sigma_{i+1}>0\}.
+\end{gather*}
+
+\begin{lemma}\label{lem:basic}
+\begin{enumerate}
+\item[(i)] $d_i\ne0$ for every $i$; in particular $\sigma_i$ and $\sigma_{i+1}$ are never both $0$.
+\item[(ii)] $\sum_i|d_i|=2T-2M$.
+\item[(iii)] $M\ge P$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) As $0<k<n$, the positions $i$ and $i+k$ differ, so $\pi_{i+k}\ne\pi_i$. (ii) Use
+$|x-y|=x+y-2\min(x,y)$ and sum over $i$. (iii) Every pair counted by $P$ contributes at least $1$ to $M$, and every
+term of $M$ is non-negative.
+\end{proof}
+
+\emph{Chains.} The map $i\mapsto i+k$ splits $\Z_n$ into $g=\gcd(n,k)$ cycles, the \emph{chains}, each of length
+$\ell=n/g\ge2$. Along a chain $i_0,i_0+k,i_0+2k,\dots$ the values $v_j=\pi_{i_0+jk}$ $(j\in\Z_\ell)$ are $\ell$ distinct
+integers and $v_{j+1}-v_j=d_{i_0+jk}$. Call $v_j$ a \emph{peak} if $v_j>v_{j\pm1}$ and a \emph{valley} if
+$v_j<v_{j\pm1}$; going around the chain, peaks and valleys alternate, so a chain with $r\ge1$ peaks has exactly $r$
+valleys. Put
+\[
+  D=\#\{i\in\Z_n: d_id_{i+k}<0\}.
+\]
+Since $i$ and $i+k$ lie in the same chain, $d_id_{i+k}<0$ exactly when $\pi_{i+k}$ is a peak or a valley of its
+chain. Hence $D=\sum_c 2r_c$, where $r_c\ge1$ is the number of peaks of chain $c$; in particular $D\ge 2g$.
+
+\begin{lemma}\label{lem:tv}
+$\sum_i|d_i|\ge 2n-4g+D$.
+\end{lemma}
+
+\begin{proof}
+Fix a chain with values $v_j$ and $r$ peaks. Write its peaks and valleys in cyclic order as
+$V_1,P_1,V_2,P_2,\dots,V_r,P_r$. Its total variation is
+\[
+  \sum_j|v_{j+1}-v_j|=\sum_{t}(P_t-V_t)+\sum_t(P_t-V_{t+1})=2\sum_tP_t-2\sum_tV_t .
+\]
+Remove from the cyclic sequence $V_1,P_1,\dots,V_r,P_r$ the largest value $P^*$ (a peak) and the smallest value
+$V^*$ (a valley). What remains is at most two paths (none if $r=1$) that alternate between peaks and valleys and have an even number
+of terms (each path runs from a neighbour of one removed term to a neighbour of the other, and these neighbours are
+of opposite types). So the remaining $r-1$ peaks can be matched with the remaining $r-1$ valleys so that matched
+terms are adjacent in the cyclic sequence; a peak exceeds its neighbouring valleys, so each matched pair has
+$P-V\ge1$. Since the $\ell$ values are distinct integers, $P^*-V^*\ge \ell-1$. Therefore the total variation is at
+least $2(\ell-1)+2(r-1)$. Summing over the $g$ chains, which partition the indices $i$, gives
+$\sum_i|d_i|\ge 2g(\ell-1)+2\sum_c(r_c-1)=2n-4g+D$.
+\end{proof}
+
+\begin{proposition}\label{prop:key}
+$2M+D\le 2(T-n)+4g$.
+\end{proposition}
+
+\begin{proof}
+Combine Lemma~\ref{lem:basic}(ii) and Lemma~\ref{lem:tv}: $2T-2M\ge 2n-4g+D$.
+\end{proof}
+
+\begin{lemma}\label{lem:pairs}
+If $k$ is odd, then $n-D\le(k+1)P$.
+\end{lemma}
+
+\begin{proof}
+Let $i$ be such that $d_id_{i+k}>0$; by Lemma~\ref{lem:basic}(i) these are the $n-D$ indices not counted by $D$.
+Suppose that none of the $k+1$ consecutive pairs $(\sigma_{i+j},\sigma_{i+j+1})$, $0\le j\le k$, consists of two
+positive numbers. No such pair consists of two zeros either (Lemma~\ref{lem:basic}(i)), so the numbers
+$\sigma_i,\sigma_{i+1},\dots,\sigma_{i+k+1}$ alternate between zero and positive. As $k$ is odd, $\sigma_{i+k}$ is
+zero exactly when $\sigma_i$ is positive. If $\sigma_i>0$, then $\sigma_{i+1}=0$, $\sigma_{i+k}=0$ and
+$\sigma_{i+k+1}>0$, so $d_i>0>d_{i+k}$; if $\sigma_i=0$, then likewise $d_i<0<d_{i+k}$. Both contradict
+$d_id_{i+k}>0$. Hence for each such $i$ there is a $j\in\{i,i+1,\dots,i+k\}$ with $\sigma_j>0$ and $\sigma_{j+1}>0$.
+A given $j$ arises in this way from at most $k+1$ indices $i$ (namely $i\in\{j-k,\dots,j\}$), so $n-D\le(k+1)P$.
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:lower}}
+
+Let $k\ge3$ be odd and $n>k$.
+
+(a) Let $n$ be odd, so $k(n+1)/2$ is an integer, and suppose some $\pi$ has $\msum(\pi,k)\le1$. Take
+$L=\frac{k(n+1)}{2}+1$; then $T=n$, and Proposition~\ref{prop:key} reads $2M+D\le 4g$. As $D\ge 2g$, we get $M\le g$
+and hence $P\le g$ by Lemma~\ref{lem:basic}(iii). By Lemma~\ref{lem:pairs}, $D\ge n-(k+1)P$, so
+\[
+  n-(k+1)P+2P\le D+2M\le 4g ,\qquad\text{i.e.}\qquad n\le 4g+(k-1)P\le (k+3)g .
+\]
+So $\msum(n,k)\le 1$ forces $n\le(k+3)g$. Since $\msum(n,k)$ is an integer here, $\msum(n,k)\ge2$ whenever
+$n>(k+3)g$.
+
+(b) Let $n$ be even, so $\msum(n,k)\in\frac12+\Z$, and suppose some $\pi$ has $\msum(\pi,k)\le\frac12$. Take
+$L=\frac{k(n+1)+1}{2}$; then $T=n/2$ and Proposition~\ref{prop:key} gives $2M+D\le 4g-n$. With $M\ge0$ and
+$D\ge2g$ this yields $n\le 2g$. Since $g$ is odd and divides the even number $n$, $2g$ divides $n$, so $n=2g$; and
+$2g=n>k$ with $g\mid k$ forces $g=k$. Hence $n=2k$. \qed
+
+\begin{remark}\label{rem:trivial}
+For odd $n$ we also have $\msum(n,k)\ge1$: if $\msum(\pi,k)=0$, take $L=k(n+1)/2$; then $T=0$, all $\sigma_i=0$ and
+all $d_i=0$, contradicting Lemma~\ref{lem:basic}(i).
+\end{remark}
+
+\section{The construction}
+
+Let $k,m\ge1$. For an array $A=(A(q,c))$ with rows $q\in\Z_m$ and columns $c\in\{0,\dots,k-1\}$ define, for
+$0\le r\le k$, the \emph{staircase sums}
+\[
+  W_A(q,r)=\sum_{c<r}A(q+1,c)+\sum_{c\ge r}A(q,c).
+\]
+(So $W_A(q,0)$ is the sum of row $q$ and $W_A(q,k)=W_A(q+1,0)$.) Call $A$ \emph{good} if its columns are
+permutations of $[m]$ and $W_A(q,r)\le\frac{k(m+1)}{2}+1$ for all $q$ and $r$.
+
+\begin{lemma}\label{lem:blocks}
+Let $A$ be a good $m\times k$ array and $\beta$ a permutation of $\{0,\dots,k-1\}$. Then
+$\pi_{qk+c}=m\beta(c)+A(q,c)$ $(0\le q<m,\ 0\le c<k)$ defines a permutation of $[mk]$ all of whose
+$k$-consecutive sums are at most $\frac{k(mk+1)}{2}+1$.
+\end{lemma}
+
+\begin{proof}
+Column $c$ of $A$ takes each value of $[m]$ once, so $\pi$ takes each value of the block
+$\{m\beta(c)+1,\dots,m\beta(c)+m\}$ once, and these blocks partition $[mk]$. The $k$ consecutive positions starting
+at $qk+r$ $(0\le r<k)$ are $qk+c$ for $c\ge r$ and $(q+1)k+c$ for $c<r$ (positions modulo $mk$, rows modulo $m$), one
+in each column. Their sum is $m\sum_c\beta(c)+W_A(q,r)=\frac{mk(k-1)}{2}+W_A(q,r)\le\frac{mk(k-1)}{2}+\frac{k(m+1)}{2}+1
+=\frac{k(mk+1)}{2}+1$.
+\end{proof}
+
+\begin{lemma}[base case]\label{lem:base}
+Let $m=2h+1\ge3$ and $k=m-2$. Define $C:\Z_m\to[m]$ by $C(i)=m-i$ for $0\le i\le h$ and $C(i)=i-h$ for
+$h<i\le 2h$, so that $C=(m,m-1,\dots,h+1,1,2,\dots,h)$. Then $A(q,c)=C(q+hc)$ is a good $m\times k$ array.
+\end{lemma}
+
+\begin{proof}
+$C$ is a bijection onto $[m]$, so every column is a permutation of $[m]$. Since $2h=m-1\equiv-1\pmod m$ we have
+$1\equiv-2h$, hence $A(q+1,c)=C(q+h(c-2))$. Therefore the entries of $W_A(q,r)$ are the values $C(q+hj)$ for
+\[
+  j\in\{-2,-1,\dots,r-3\}\cup\{r,r+1,\dots,k-1\}=\{-2,\dots,k-1\}\setminus\{r-2,r-1\}.
+\]
+The set $\{-2,\dots,k-1\}$ consists of $k+2=m$ consecutive integers and $\gcd(h,m)=1$, so the residues $q+hj$,
+$-2\le j\le k-1$, run over all of $\Z_m$. With $y=q+h(r-2)$ we obtain
+\[
+  W_A(q,r)=\sum_{x\in\Z_m}C(x)-C(y)-C(y+h)=\frac{m(m+1)}{2}-\bigl(C(y)+C(y+h)\bigr).
+\]
+Now $C(y)+C(y+h)\ge m$ for every $y$: for $1\le y\le h$ it equals $(m-y)+y=m$; for $y=0$ it equals $m+(h+1)$; and for
+$h<y\le 2h$ we have $y+h\equiv y-h-1\in\{0,\dots,h-1\}$, so it equals $(y-h)+(m-y+h+1)=m+1$. Hence
+$W_A(q,r)\le\frac{m(m+1)}{2}-m=\frac{(m-2)(m+1)}{2}+1=\frac{k(m+1)}{2}+1$.
+\end{proof}
+
+\begin{lemma}[adding two columns]\label{lem:insert}
+Let $A$ be a good $m\times k$ array and $0\le j<k$. Insert immediately before column $j$ two new columns, first a
+copy $U$ of column $j$ and then its complement $\bar U=m+1-U$. The resulting $m\times(k+2)$ array $A'$ is good.
+\end{lemma}
+
+\begin{proof}
+The new columns are permutations of $[m]$. In $A'$ the columns are, in order, the old columns $0,\dots,j-1$, then
+$U,\bar U$, then the old columns $j,\dots,k-1$. Consider a staircase sum $W_{A'}(q,r')$, $0\le r'\le k+2$.
+If $r'\le j$, both new columns are taken from row $q$; if $r'\ge j+2$, both are taken from row $q+1$. In these cases
+they contribute $U+\bar U=m+1$, and the old columns contribute $W_A(q,r')$ or $W_A(q,r'-2)$ respectively, so
+$W_{A'}(q,r')\le\frac{k(m+1)}2+1+(m+1)=\frac{(k+2)(m+1)}2+1$. If $r'=j+1$, then $U$ is taken from row $q+1$ and
+$\bar U$ from row $q$, while the old columns contribute $W_A(q,j)$; thus
+\[
+  W_{A'}(q,j+1)=W_A(q,j)+A(q+1,j)+\bigl(m+1-A(q,j)\bigr)=W_A(q,j+1)+(m+1),
+\]
+and the same bound holds.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:construction}]
+Start from the good $m\times(m-2)$ array of Lemma~\ref{lem:base} and apply Lemma~\ref{lem:insert}
+$\frac{k-m+2}{2}$ times to obtain a good $m\times k$ array; then apply Lemma~\ref{lem:blocks}.
+\end{proof}
+
+For example, for $k=m=5$, inserting the pair before column $j=1$ of the base array for $m=5$ gives the columns
+$54312$, $31254$, $35412$, $31254$, $25431$ (each listing rows $0$ to $4$), and $\beta(c)=4-c$ gives the
+arrangement
+\[
+  25,18,13,8,2,\ 24,16,15,6,5,\ 23,17,14,7,4,\ 21,20,11,10,3,\ 22,19,12,9,1
+\]
+of $[25]$, whose $5$-consecutive sums are $63$, $65$ or $66$, while the average is $65$. In general the staircase
+sums of the arrays in Theorem~\ref{thm:construction} take only the three values $\frac{k(m+1)}2+1$,
+$\frac{k(m+1)}2$ and $\frac{k(m+1)}2-\frac{m-1}2$.
+
+\section{Proofs of the corollaries}
+
+\begin{proof}[Proof of Corollary~\ref{cor:mk}]
+By Remark~\ref{rem:trivial}, $\msum(mk,k)\ge1$, and by Theorem~\ref{thm:construction} equality holds for
+$m\le k+2$. For $m\ge k+4$ we have $g=\gcd(mk,k)=k$ and $mk>(k+3)k$, so Theorem~\ref{thm:lower}(a) gives
+$\msum(mk,k)\ge2$, while $\msum(mk,k)\le\disc(mk,k)\le2$ for odd $k$ by~\cite{AFG} (see~\cite[Theorem~2.4(iv)]{HK}).
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:clock}]
+Here $a(n)=\frac{3(n+1)}2+\msum(n,3)$, and $f(n)=\lceil 3n/2\rceil+3$ equals $\frac{3(n+1)}2+2$ for odd $n$ and
+$\frac{3(n+1)}2+\frac32$ for even $n$.
+
+\emph{Upper bound.} For $n\ge6$, $\msum(n,3)\le\disc(n,3)\le2$~\cite{AFG} (see~\cite[Theorem~2.4(iii)]{HK}); for even $n$ this means
+$\msum(n,3)\le\frac32$ because $\msum(n,3)\in\frac12+\Z$. So $a(n)\le f(n)$ for $n\ge6$. Schoenfield's explicit
+arrangements~\cite{OEIS} give the same bound for all $n\ge3$. For $n=4$, every three neighbours omit one number, so
+$a(4)=10-1=9=f(4)$.
+
+\emph{Lower bound.} Let $n\ge5$ and $g=\gcd(n,3)$. If $n$ is odd and $3\nmid n$, Theorem~\ref{thm:lower}(a) gives
+$\msum(n,3)\ge2$ for $n>6$. If $n=3m$ is odd, Corollary~\ref{cor:mk} gives $\msum(n,3)=2$ for $m\ge7$, that is for
+$n\ge21$. If $n$ is even, Theorem~\ref{thm:lower}(b) gives $\msum(n,3)\ge\frac32$ unless $n=6$. Hence $a(n)=f(n)$ for all $n\ge4$ except possibly $n=5,6,9,15$.
+
+\emph{The exceptions.} For odd $n$, $a(n)\ge\frac{3(n+1)}2+1=f(n)-1$ by Remark~\ref{rem:trivial}, and for $n=6$,
+$a(6)\ge\lceil 21/2\rceil=11=f(6)-1$. The arrangements
+\begin{gather*}
+  (5,1,4,3,2),\qquad (6,1,4,5,2,3),\qquad (9,4,3,8,5,2,7,6,1),\\ (15,8,2,14,6,5,13,7,4,11,10,3,12,9,1)
+\end{gather*}
+have largest sums of three neighbours $10$, $11$, $16$ and $25$, respectively; the last two come from
+Theorem~\ref{thm:construction} with $(k,m)=(3,3)$ and $(3,5)$.
+\end{proof}
+
+\section{Computations}
+
+The arguments above need no computer. As a check we verified the following by computer; the programs are short
+C and Python codes.
+\begin{enumerate}
+\item Lemma~\ref{lem:basic}, Lemma~\ref{lem:tv}, Proposition~\ref{prop:key}, Lemma~\ref{lem:pairs} and the final
+inequality $n\le 2(T-n)+4g+(k-1)P$ hold for every circular arrangement of $[n]$ with $4\le n\le11$ $(k=3)$ and
+$6\le n\le 11$ $(k=5)$, taking for $L$ the largest $k$-consecutive sum and the next two integers (about
+$2.4\times10^7$ cases in all). A second, independently written program confirmed them for all $k\le9$ with
+$n\le10$ and for $n=11,12$ with $k=3,5,7,9$ (Lemma~\ref{lem:pairs} and the final inequality for odd $k$ only).
+\item The arrays of Theorem~\ref{thm:construction}, with several insertion positions and random block orders
+$\beta$, give arrangements with largest $k$-consecutive sum exactly $\frac{k(mk+1)}2+1$ for all odd $3\le k\le61$
+and odd $3\le m\le k+2$; the second program also tried every sequence of insertion positions for $k\le 11$ and
+every block order $\beta$ for $k\le7$.
+\item An exhaustive branch-and-bound search, which prunes with Lemmas~\ref{lem:basic}(ii) and~\ref{lem:tv} and was
+checked against plain enumeration, reproduces all published values $a(3),\dots,a(38)$ and
+gives $a(39)=62$, $a(40)=63$, $a(41)=65$, $a(42)=66$, $a(43)=68$ and $a(44)=69$, in agreement with
+Corollary~\ref{cor:clock}. For $k=5$ it finds
+arrangements with $\msum(\pi,5)=1$ for $n=15,25,35$, in agreement with Corollary~\ref{cor:mk}.
+\end{enumerate}
+
+\subsection*{Acknowledgement}
+The arguments, the programs and the computations in this note were developed with the help of an AI assistant
+(Claude, by Anthropic). The author has checked them and takes responsibility for the content.
+
+\begin{thebibliography}{9}
+\bibitem{AFG} R.~P.~Anstee, R.~Ferguson and J.~R.~Griggs, Permutations with low discrepancy consecutive $k$-sums,
+\emph{J. Combin. Theory Ser. A} \textbf{100} (2002), 302--321.
+\bibitem{BWM} Bundeswettbewerb Mathematik 2002, first round, problem~4.
+\bibitem{Clark} D.~S.~Clark, A combinatorial theorem on circulant matrices, \emph{Amer. Math. Monthly} \textbf{92}
+(1985), no.~10, \url{https://www.jstor.org/stable/2323225}.
+\bibitem{Gardner} M.~Gardner, column in \emph{Isaac Asimov's Science Fiction Magazine}, August 1986.
+\bibitem{HK} A.~Higashitani and K.~Kurimoto, Permutations with small maximal $k$-consecutive sums,
+\emph{Discrete Math.} \textbf{342} (2019), 2467--2481; arXiv:1801.00416.
+\bibitem{OEIS} OEIS Foundation Inc., The On-Line Encyclopedia of Integer Sequences, sequence A066385,
+\url{https://oeis.org/A066385} (comments by J.~E.~Schoenfield, June and July 2019).
+\bibitem{Rolfe} T.~Rolfe, Recurse around the clock, \emph{Mathematics and Computer Education} \textbf{21} (1987),
+no.~2, 98--104.
+\bibitem{RP} T.~J.~Rolfe and P.~W.~Purdom, An alternative problem for backtracking and bounding,
+\emph{ACM SIGCSE Bulletin} \textbf{36} (2004), no.~4, 83--84.
+\end{thebibliography}
+
+\end{document}

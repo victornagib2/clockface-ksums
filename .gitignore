@@ -1,0 +1,10 @@
+src/clock_bt3
+src/kwin
+tests/lemmas
+tests/brute
+__pycache__/
+split_*.jsonl
+*.aux
+*.log
+!results/*.log
+*.out
