@@ -14,7 +14,7 @@ The note [paper/clockface.pdf](paper/clockface.pdf) proves:
 | --- | --- |
 | Theorem 1 | For odd k ≥ 3, n > k and g = gcd(n, k): msum(n, k) ≥ 2 if n is odd and n > (k+3)g; msum(n, k) ≥ 3/2 if n is even and n ≠ 2k. |
 | Theorem 2 | For odd k and odd 3 ≤ m ≤ k+2 there is an explicit arrangement of 1..mk with every k-sum at most k(mk+1)/2 + 1. |
-| Corollary 3 | For odd k ≥ 3 and odd m ≥ 3: msum(mk, k) = 1 if m ≤ k+2, and 2 if m ≥ k+4. Previously known only for m = 3 and m ≥ 2k+3 (and k = 3). |
+| Corollary 3 | For odd k ≥ 3 and odd m ≥ 3: msum(mk, k) = 1 if m ≤ k+2, and 2 if m ≥ k+4. Previously known only for m = 3, for m ≥ 2k+3, for n = 15 and 21 when k = 3, and for n = 35 when k = 7 (by computer: Bogdanović, Maksimović, Simić and Milošević, 2017). |
 | Corollary 4 | Clock-face numbers: a(n) = ⌈3n/2⌉ + 3 for all n ≥ 4 except a(5) = 10, a(6) = 11, a(9) = 16, a(15) = 25. |
 
 Corollary 4 confirms the conjecture of J. E. Schoenfield in A066385. Its lower bound is proved without any
@@ -35,6 +35,10 @@ None of the proofs in the note needs a computer. As a check:
   n ≤ 11 (k = 3 and k = 5), about 2.4 × 10^7 cases.
 - `src/construction.py` builds the arrangements of Theorem 2 and checks them for all odd k ≤ 61 and odd
   m ≤ k + 2.
+- [results/lemma_checks.log](results/lemma_checks.log) and
+  [results/construction_check_k_up_to_61.log](results/construction_check_k_up_to_61.log) are the outputs of these two
+  checks, and [results/theorem2_arrangements.txt](results/theorem2_arrangements.txt) lists the arrangements of Theorem 2
+  for all odd k ≤ 11, so they can be checked by hand.
 - `src/clock_bt3.c` is an exhaustive branch-and-bound search for k = 3, and `src/kwin.c` the same for any k.
   Both are checked against plain enumeration (`tests/brute.c`). They confirm a(n) for every n from 3 to 44:
   [results/verify_known_3_31.log](results/verify_known_3_31.log) and
@@ -54,6 +58,14 @@ None of the proofs in the note needs a computer. As a check:
 none exists (`block = 1` restricts the search to the block structure of Theorem 2, which is faster but can only
 find arrangements, not rule them out).
 
+## Version history
+
+- **1.1 (6 November 2026).** Added the reference to Bogdanović, Maksimović, Simić and Milošević (2017), whose
+  computation disc(35, 7) = 1 already gave msum(35, 7) = 1, so that case of Corollary 3 was known before; the note's
+  introduction and abstract now say so. Added the logs of the lemma and construction checks. The theorems and proofs
+  are unchanged.
+- **1.0 (30 October 2026).** First version.
+
 ## How to cite
 
 > Victor Nidal Bassem Nagib, *Small maximal k-consecutive sums on a circle and the clock-face problem*, 2026,
@@ -65,6 +77,9 @@ find arrangements, not rule them out).
   2467–2481, [arXiv:1801.00416](https://arxiv.org/abs/1801.00416).
 - R. P. Anstee, R. Ferguson and J. R. Griggs, Permutations with low discrepancy consecutive k-sums,
   J. Combin. Theory Ser. A 100 (2002) 302–321.
+- M. Bogdanović, Z. Maksimović, A. Simić and J. Milošević, A mixed integer linear programming formulation for low
+  discrepancy consecutive k-sums permutation problem, Yugosl. J. Oper. Res. 27 (2017) 125–132,
+  [doi:10.2298/YJOR160104005B](https://doi.org/10.2298/YJOR160104005B).
 - OEIS [A066385](https://oeis.org/A066385), with the comments and the construction of J. E. Schoenfield (2019).
 
 The code is MIT licensed. The note, the code and the computations were produced with the help of an AI assistant
