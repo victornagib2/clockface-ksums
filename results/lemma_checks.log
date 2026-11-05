@@ -1,0 +1,14 @@
+k=3 n=4: 18 (arrangement, L) cases; failures: (1) 0 (2) 0 (3) 0 (4) 0 (5) 0 (6) 0; min max window sum = 9
+k=3 n=5: 72 (arrangement, L) cases; failures: (1) 0 (2) 0 (3) 0 (4) 0 (5) 0 (6) 0; min max window sum = 10
+k=3 n=6: 360 (arrangement, L) cases; failures: (1) 0 (2) 0 (3) 0 (4) 0 (5) 0 (6) 0; min max window sum = 11
+k=3 n=7: 2160 (arrangement, L) cases; failures: (1) 0 (2) 0 (3) 0 (4) 0 (5) 0 (6) 0; min max window sum = 14
+k=3 n=8: 15120 (arrangement, L) cases; failures: (1) 0 (2) 0 (3) 0 (4) 0 (5) 0 (6) 0; min max window sum = 15
+k=3 n=9: 120960 (arrangement, L) cases; failures: (1) 0 (2) 0 (3) 0 (4) 0 (5) 0 (6) 0; min max window sum = 16
+k=3 n=10: 1088640 (arrangement, L) cases; failures: (1) 0 (2) 0 (3) 0 (4) 0 (5) 0 (6) 0; min max window sum = 18
+k=5 n=6: 360 (arrangement, L) cases; failures: (1) 0 (2) 0 (3) 0 (4) 0 (5) 0 (6) 0; min max window sum = 20
+k=5 n=7: 2160 (arrangement, L) cases; failures: (1) 0 (2) 0 (3) 0 (4) 0 (5) 0 (6) 0; min max window sum = 21
+k=5 n=8: 15120 (arrangement, L) cases; failures: (1) 0 (2) 0 (3) 0 (4) 0 (5) 0 (6) 0; min max window sum = 24
+k=5 n=9: 120960 (arrangement, L) cases; failures: (1) 0 (2) 0 (3) 0 (4) 0 (5) 0 (6) 0; min max window sum = 27
+k=5 n=10: 1088640 (arrangement, L) cases; failures: (1) 0 (2) 0 (3) 0 (4) 0 (5) 0 (6) 0; min max window sum = 28
+k=3 n=11: 10886400 (arrangement, L) cases; failures: (1) 0 (2) 0 (3) 0 (4) 0 (5) 0 (6) 0; min max window sum = 20
+k=5 n=11: 10886400 (arrangement, L) cases; failures: (1) 0 (2) 0 (3) 0 (4) 0 (5) 0 (6) 0; min max window sum = 33

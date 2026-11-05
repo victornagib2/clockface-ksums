@@ -17,7 +17,7 @@
 
 \title{Small maximal $k$-consecutive sums on a circle\\ and the clock-face problem}
 \author{Victor Nidal Bassem Nagib}
-\date{October 30, 2026}
+\date{October 30, 2026; revised November 6, 2026}
 
 \begin{document}
 
@@ -25,7 +25,7 @@
 Arrange $1,2,\dots,n$ on a circle and let $\msum(n,k)$ be the smallest possible value of the largest sum of $k$
 consecutive entries, minus the average $k(n+1)/2$ of these sums. For odd $k\ge 3$ and odd $m$, Higashitani and
 Kurimoto proved $\msum(mk,k)=2$ for $m\ge 2k+3$, while for $5\le m\le 2k+1$ it was only known that
-$\msum(mk,k)\in\{1,2\}$, apart from two cases with $k=3$. We show that $\msum(mk,k)=1$ for $3\le m\le k+2$ and $\msum(mk,k)=2$ for
+$\msum(mk,k)\in\{1,2\}$, apart from two cases with $k=3$ and one case with $k=7$ settled by computer. We show that $\msum(mk,k)=1$ for $3\le m\le k+2$ and $\msum(mk,k)=2$ for
 $m\ge k+4$, which settles this case. The lower bound comes from a short total-variation argument giving, for
 odd $k$, $\msum(n,k)\ge 2$ for every odd $n>(k+3)\gcd(n,k)$; the upper bound is an explicit construction. For
 $k=3$ the argument gives a short proof, with no computer verification, that the clock-face numbers (OEIS A066385)
@@ -67,7 +67,8 @@ $\msum(21,3)=2$ is credited there to a personal communication of T.~Yamashita~\c
 and $n=mk$ with $m$ odd they prove $\msum(mk,k)=2$ for $m\ge 2k+3$~\cite[Theorem~1.1]{HK}, and $\msum(3k,k)=1$
 follows from $\disc(3k,k)=1$~\cite{AFG}. Since $1\le\msum(mk,k)\le\disc(mk,k)\le 2$~\cite{AFG}, the open cases were
 odd $m$ with $5\le m\le 2k+1$, except that for $k=3$ the values $\msum(15,3)=1$ and $\msum(21,3)=2$ were
-known~\cite[Remark~1.7]{HK}.
+known~\cite[Remark~1.7]{HK}, and $\msum(35,7)=1$ follows from the value $\disc(35,7)=1$ computed by integer
+programming by Bogdanovi\'c, Maksimovi\'c, Simi\'c and Milo\v{s}evi\'c~\cite{BMSM}.
 
 Our first result is a lower bound for odd $k$ and all $n$.
 
@@ -352,7 +353,10 @@ The arguments, the programs and the computations in this note were developed wit
 
 \begin{thebibliography}{9}
 \bibitem{AFG} R.~P.~Anstee, R.~Ferguson and J.~R.~Griggs, Permutations with low discrepancy consecutive $k$-sums,
-\emph{J. Combin. Theory Ser. A} \textbf{100} (2002), 302--321.
+\emph{J. Combin. Theory Ser. A} \textbf{100} (2002), no.~2, 302--321, \url{https://doi.org/10.1006/jcta.2002.3304}.
+\bibitem{BMSM} M.~Bogdanovi\'c, Z.~Maksimovi\'c, A.~Simi\'c and J.~Milo\v{s}evi\'c, A mixed integer linear
+programming formulation for low discrepancy consecutive $k$-sums permutation problem, \emph{Yugosl. J. Oper. Res.}
+\textbf{27} (2017), no.~1, 125--132, \url{https://doi.org/10.2298/YJOR160104005B}.
 \bibitem{BWM} Bundeswettbewerb Mathematik 2002, first round, problem~4.
 \bibitem{Clark} D.~S.~Clark, A combinatorial theorem on circulant matrices, \emph{Amer. Math. Monthly} \textbf{92}
 (1985), no.~10, \url{https://www.jstor.org/stable/2323225}.
