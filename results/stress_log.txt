@@ -1,0 +1,7 @@
+== stress_lemmas.py (random permutations up to n = 400, k up to 21; local-search permutations; Theorem 2 arrangements for odd k <= 21)
+1545 (permutation, L) cases checked; Lemma 6 held with equality in 204 of them
+failures: none
+
+== stress_near_optimal.py (optimal k = 3 arrangements for n = 4..300; annealed near-optimal for k = 5, 7, 9)
+834 cases; Lemma 6 held with equality in 602; excess of the inputs (largest sum minus average): min 0.5, median 2.0, max 11.5
+failures: none

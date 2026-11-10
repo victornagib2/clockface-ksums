@@ -1,0 +1,236 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs,array,longtable}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{claim}{Claim}
+\newtheorem*{thmA}{Theorem 2}
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newcommand{\msum}{\mathsf{msum}}
+\newcommand{\disc}{\mathsf{disc}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\title[Reviewer's companion]{Reviewer's companion to \emph{Small maximal $k$-consecutive sums on a circle and the clock-face problem}}
+\author{Victor Nidal Bassem Nagib}
+\date{November 10, 2026}
+
+\begin{document}
+\begin{abstract}
+This companion answers three review points. Section~1 traces every hypothesis of every result in the note to the
+step that uses it, and lists the only outside results the proofs need. Section~2 proves the upper-bound
+construction (Theorem~2) again with every index written out, including why the order of the value blocks never
+matters. Section~3 goes through the boundary cases. Section~4 says what the computer checks do and do not
+establish. Numbering of lemmas and theorems refers to the note (version of November 2026).
+\end{abstract}
+\maketitle
+
+\section{Hypotheses and logical dependencies}
+
+Throughout, positions are taken modulo $n$, $[n]=\{1,\dots,n\}$, and $s_i=\pi_i+\dots+\pi_{i+k-1}$. No step of any
+proof uses a computer. The only results imported from the literature are two upper bounds of Anstee, Ferguson and
+Griggs, quoted from Higashitani and Kurimoto, Theorem~2.4:
+\begin{itemize}
+\item[(AFG4)] $\disc(n,3)\le2$ for $n\ge6$ (AFG, Theorem~4; HK, Theorem~2.4(iii));
+\item[(AFG7)] $\disc(mk,k)\le2$ for odd $k$ (AFG, Theorem~7; HK, Theorem~2.4(iv)).
+\end{itemize}
+Both are used only through $\msum\le\disc$, which holds by definition. Everything else cited in the note (the
+values $\msum(15,3)$, $\msum(21,3)$, $\msum(35,7)$, HK's Theorem~1.1 and Lemma~5.3, the history) is context and is
+not used in any proof.
+
+\begin{longtable}{@{}>{\raggedright}p{2.3cm}>{\raggedright}p{3.3cm}>{\raggedright}p{3.6cm}>{\raggedright\arraybackslash}p{5.2cm}@{}}
+\toprule
+Result & Hypotheses & Uses & Where each hypothesis is used\\
+\midrule
+\endhead
+Lemma 5 & $0<k<n$; $s_i\le L$, $L\in\Z$ & definitions only & (i) $0<k<n$: positions $i$, $i+k$ differ, so
+$\pi_{i+k}\ne\pi_i$. (iii) $L\in\Z$: the $\sigma_i$ are integers, so a positive pair contributes $\ge1$ to $M$.\\
+Chains, $D\ge2g$ & $0<k<n$ & definitions & $g=\gcd(n,k)\le k<n$ gives chain length $\ell=n/g\ge2$, so every chain
+has a peak and a valley.\\
+Lemma 6 & $0<k<n$ & chain facts & distinct values on a chain give $P^*-V^*\ge\ell-1$; holds for every $\ell\ge2$
+(for $\ell=2$ the chain is one peak and one valley).\\
+Prop.\ 7 & as Lemma 5 & Lemma 5(ii), Lemma 6 & none beyond those.\\
+Lemma 8 & $k$ odd; $\sigma_i\ge0$ & Lemma 5(i) & $k$ odd: in an alternating zero/positive run, $\sigma_{i+k}$ has the
+opposite status to $\sigma_i$. $\sigma_i\ge0$: ``zero or positive'' covers all cases.\\
+Thm 1(a) & $k\ge3$ odd, $n>k$, $n$ odd & Prop.\ 7, $D\ge2g$, Lemma 5(iii), Lemma 8 & $n$ odd: $k(n+1)/2\in\Z$, so
+$L$ is an integer and $\msum(n,k)\in\Z$. $k$ odd: Lemma 8. $n>k$: Lemma 5(i).\\
+Thm 1(b) & $k\ge3$ odd, $n>k$, $n$ even & Prop.\ 7, $D\ge2g$ & $k$ odd, $n$ even: $k(n+1)$ odd, so
+$\msum\in\frac12+\Z$ and $L=\frac{k(n+1)+1}2\in\Z$; $g$ odd gives $2g\mid n$.\\
+Remark 9 & $n$ odd, $0<k<n$ & Lemma 5(i) & $n$ odd: $L=k(n+1)/2\in\Z$.\\
+Lemma 10 & good array & definitions & proved in full in \S2 (Claim 1).\\
+Lemma 11 & $m=2h+1\ge3$, $k=m-2$ & definitions & $m$ odd: $2h\equiv-1$ and $\gcd(h,m)=1$ (Claim 2).\\
+Lemma 12 & good array, $0\le j<k$ & definitions & column $j$ must exist (Claim 3).\\
+Thm 2 & $k,m$ odd, $1\le k$, $3\le m\le k+2$ & Lemmas 10--12 & $k,m$ odd and $m\le k+2$: $(k-m+2)/2$ is a
+non-negative integer.\\
+Cor.\ 3 & $k,m$ odd, $k\ge3$, $m\ge3$ & Thm 1(a), Thm 2, Remark 9, (AFG7) & odd $m$ is either $\le k+2$ or $\ge k+4$
+($k+3$ is even), so the two cases are exhaustive.\\
+Cor.\ 4 & $k=3$, $n\ge4$ & Thm 1, Cor.\ 3, Remark 9, (AFG4), four explicit arrangements & case split on the parity of
+$n$ and on $3\mid n$; see \S3.\\
+\bottomrule
+\end{longtable}
+
+\medskip
+The only place where $k$ odd is genuinely needed in the lower bound is Lemma~8 (and the parity bookkeeping in
+Theorem~1). Theorem~2 needs $k$ and $m$ odd for the base array and for the number of insertions. In the note the
+hypothesis of Theorem~2 reads ``Let $k\ge1$ and $m\ge3$ be odd'', meaning that both are odd; the next version states
+it as ``Let $k$ and $m$ be odd integers with $k\ge1$ and $3\le m\le k+2$'', and Corollary~3 likewise, to avoid the
+reading in which only $m$ is odd.
+
+\section{The construction, with every index written out}
+
+\begin{thmA}
+Let $k$ and $m$ be odd integers with $k\ge1$ and $3\le m\le k+2$, and put $n=mk$. Then there is a permutation
+$\pi$ of $[n]$ with $s_i\le\frac{k(n+1)}2+1$ for all $i$.
+\end{thmA}
+
+\subsection*{Arrays and staircase sums}
+An \emph{array} is a map $A:\Z_m\times\{0,\dots,k-1\}\to[m]$ (rows $q\in\Z_m$, columns $c$). It is
+\emph{column-complete} if each column $q\mapsto A(q,c)$ is a bijection $\Z_m\to[m]$. For $0\le r\le k$ put
+\[
+W_A(q,r)=\sum_{c=0}^{r-1}A(q+1,c)+\sum_{c=r}^{k-1}A(q,c),
+\]
+the sum of one entry from each column: columns left of $r$ taken from row $q+1$, the others from row $q$. Note
+$W_A(q,k)=W_A(q+1,0)$. Call $A$ \emph{good} if it is column-complete and $W_A(q,r)\le\frac{k(m+1)}2+1$ for all
+$q\in\Z_m$ and $0\le r\le k-1$ (then also for $r=k$).
+
+\begin{claim}[Lemma 10: blocks, any order]
+Let $A$ be good and $\beta$ \emph{any} bijection of $\{0,\dots,k-1\}$. Define $\pi$ on the positions $p=qk+c$
+$(0\le q\le m-1,\ 0\le c\le k-1)$ of a circle of length $n=mk$ by $\pi_{qk+c}=m\beta(c)+A(q,c)$. Then $\pi$ is a
+permutation of $[n]$ and every $k$-consecutive sum of $\pi$ is at most $\frac{k(n+1)}2+1$.
+\end{claim}
+
+\begin{proof}
+\emph{Permutation.} Fix $c$. As $q$ runs over $\Z_m$, $A(q,c)$ runs over $[m]$, so $\pi_{qk+c}$ runs over the block
+$B_c=\{m\beta(c)+1,\dots,m\beta(c)+m\}$. Since $\beta$ is a bijection onto $\{0,\dots,k-1\}$, the blocks $B_c$ are
+the $k$ disjoint intervals $\{mb+1,\dots,mb+m\}$, $0\le b\le k-1$, whose union is $[mk]$. The map $(q,c)\mapsto qk+c$
+is a bijection onto $\{0,\dots,n-1\}$, so $\pi$ is a permutation of $[n]$.
+
+\emph{Windows.} Every window of $k$ consecutive positions starts at some $p=qk+r$ with $q\in\Z_m$ and $0\le r\le k-1$.
+Its positions are $qk+r,\dots,qk+k-1$ (row $q$, columns $r,\dots,k-1$) followed by $(q+1)k,\dots,(q+1)k+r-1$ (row
+$q+1$ taken modulo $m$, columns $0,\dots,r-1$); when $q=m-1$ the second group is row $0$, because position $mk$ is
+position $0$. So the window contains exactly one position in each column $c$, in row $q+1$ if $c<r$ and in row $q$
+if $c\ge r$. Its sum is therefore
+\[
+\sum_{c=0}^{k-1}m\beta(c)+W_A(q,r)=m\cdot\frac{k(k-1)}2+W_A(q,r),
+\]
+because $\sum_c\beta(c)=0+1+\dots+(k-1)$ for \emph{every} bijection $\beta$. This is where the block order drops out:
+it changes which block a column uses, but each window always meets every block exactly once. Finally
+\[
+m\frac{k(k-1)}2+\frac{k(m+1)}2+1=\frac{mk^2-mk+km+k}2+1=\frac{k(mk+1)}2+1=\frac{k(n+1)}2+1. \qedhere
+\]
+\end{proof}
+
+\begin{claim}[Lemma 11: base array]
+Let $m=2h+1\ge3$ and $k=m-2$. Define $C:\Z_m\to[m]$ by $C(0)=m$, $C(y)=m-y$ for $1\le y\le h$, and $C(y)=y-h$ for
+$h+1\le y\le 2h$. Then $A(q,c)=C(q+hc)$ (indices modulo $m$) is good.
+\end{claim}
+
+\begin{proof}
+\emph{$C$ is a bijection.} Its values are $m$; $m-1,\dots,m-h=h+1$; and $1,\dots,h$: together $[m]$, each once.
+For each $c$ the map $q\mapsto q+hc$ is a bijection of $\Z_m$, so $A$ is column-complete.
+
+\emph{Rewriting row $q+1$.} Since $2h=m-1$, we have $-2h\equiv1\pmod m$, so $q+1+hc\equiv q+h(c-2)$ and
+$A(q+1,c)=C(q+h(c-2))$. Hence, for $0\le r\le k-1$,
+\[
+W_A(q,r)=\sum_{c=0}^{r-1}C\bigl(q+h(c-2)\bigr)+\sum_{c=r}^{k-1}C(q+hc)=\sum_{j\in J}C(q+hj),\qquad
+J=\{-2,\dots,r-3\}\cup\{r,\dots,k-1\},
+\]
+substituting $j=c-2$ in the first sum and $j=c$ in the second. The two ranges are disjoint, and
+$J=\{-2,-1,\dots,k-1\}\setminus\{r-2,r-1\}$, where the removed pair always lies inside $\{-2,\dots,k-1\}$ because
+$0\le r\le k-1$.
+
+\emph{Completing the sum.} The set $\{-2,\dots,k-1\}$ consists of $k+2=m$ consecutive integers. As $\gcd(h,m)=
+\gcd(h,2h+1)=1$, the residues $q+hj$ for $j$ in any $m$ consecutive integers are all of $\Z_m$, each once. So
+$\sum_{j=-2}^{k-1}C(q+hj)=\sum_{y\in\Z_m}C(y)=\frac{m(m+1)}2$, and with $y=q+h(r-2)$,
+\[
+W_A(q,r)=\frac{m(m+1)}2-C(y)-C(y+h).
+\]
+
+\emph{The key inequality $C(y)+C(y+h)\ge m$ for all $y\in\Z_m$.} Three cases.
+\begin{itemize}
+\item $y=0$: $C(0)+C(h)=m+(m-h)=m+h+1>m$.
+\item $1\le y\le h$: then $h+1\le y+h\le2h$, so $C(y)+C(y+h)=(m-y)+(y+h-h)=m$.
+\item $h+1\le y\le2h$: then $2h+1\le y+h\le3h$, so $y+h\equiv y+h-m=y-h-1\in\{0,\dots,h-1\}$. If $y-h-1=0$ then
+$C(y+h)=C(0)=m$; otherwise $C(y+h)=m-(y-h-1)$; in both cases $C(y+h)=m-y+h+1$. With $C(y)=y-h$ the sum is $m+1$.
+\end{itemize}
+Hence $W_A(q,r)\le\frac{m(m+1)}2-m=\frac{m(m-1)}2$, and with $k=m-2$,
+$\frac{k(m+1)}2+1=\frac{(m-2)(m+1)+2}2=\frac{m(m-1)}2$. So $A$ is good.
+\end{proof}
+
+\begin{claim}[Lemma 12: adding two columns]
+Let $A$ be good with $k$ columns, $0\le j\le k-1$, and let $U=A(\cdot,j)$ and $\bar U=m+1-U$. Let $A'$ have the
+$k+2$ columns: old columns $0,\dots,j-1$; then $U$ (new index $j$); then $\bar U$ (new index $j+1$); then old columns
+$j,\dots,k-1$ (new indices $j+2,\dots,k+1$). Then $A'$ is good.
+\end{claim}
+
+\begin{proof}
+$U$ is a column of $A$ and $\bar U$ is its image under $x\mapsto m+1-x$, so both are bijections onto $[m]$. For each
+row, $U(q)+\bar U(q)=m+1$. Fix $q$ and $0\le r'\le k+1$, and recall that $W_{A'}(q,r')$ takes new column $c'$ from row
+$q+1$ if $c'<r'$ and from row $q$ otherwise.
+\begin{itemize}
+\item $r'\le j$. Both new columns ($c'=j,j+1\ge r'$) come from row $q$ and give $m+1$. Old column $c$ has new index $c$
+if $c<j$ and $c+2$ if $c\ge j$; it comes from row $q+1$ exactly when its new index is $<r'$, i.e.\ when $c<r'$
+(since $r'\le j$). So $W_{A'}(q,r')=W_A(q,r')+(m+1)$.
+\item $r'\ge j+2$. Both new columns come from row $q+1$ and give $m+1$. Old column $c<j$ (index $c<r'$) comes from
+row $q+1$; old column $c\ge j$ (index $c+2$) comes from row $q+1$ exactly when $c<r'-2$. As $r'-2\ge j$, in both
+cases the rule is ``$c<r'-2$'', so $W_{A'}(q,r')=W_A(q,r'-2)+(m+1)$, where $0\le r'-2\le k-1$.
+\item $r'=j+1$. $U$ (index $j<r'$) comes from row $q+1$, $\bar U$ (index $j+1$) from row $q$. Old columns $c<j$ come
+from row $q+1$ and $c\ge j$ from row $q$. So
+$W_{A'}(q,j+1)=\sum_{c<j}A(q+1,c)+A(q+1,j)+\bigl(m+1-A(q,j)\bigr)+\sum_{c\ge j}A(q,c)
+=\sum_{c\le j}A(q+1,c)+\sum_{c>j}A(q,c)+(m+1)=W_A(q,j+1)+(m+1)$.
+\end{itemize}
+In every case $W_{A'}(q,r')\le\frac{k(m+1)}2+1+(m+1)=\frac{(k+2)(m+1)}2+1$, which is the bound for $k+2$ columns.
+\end{proof}
+
+\begin{proof}[Proof of Theorem 2]
+Let $k_0=m-2$, which is odd and $\ge1$. Claim~2 gives a good $m\times k_0$ array. Since $k$ and $m$ are odd and
+$m\le k+2$, $t=(k-k_0)/2=(k-m+2)/2$ is a non-negative integer. Applying Claim~3 $t$ times (with any choice of the
+insertion column $j$ each time) gives a good $m\times k$ array; Claim~1 with any bijection $\beta$ gives the
+permutation. When $m=k+2$, $t=0$ and the base array is used directly.
+\end{proof}
+
+\begin{rem}
+The proof never restricts the block order $\beta$ or the insertion positions: every choice works. The programs
+sample random block orders and several insertion sequences only as a check of the code, not as part of the proof.
+\end{rem}
+
+\section{Boundary cases}
+
+\begin{itemize}
+\item \emph{$k=1$} (allowed in Theorem~2): then $m=3$, $n=3$, and the bound $\frac{1\cdot4}2+1=3$ is trivial.
+\item \emph{$m=3$}: $k_0=1$ and $C=(3,2,1)$; the base array is one column. For $k=3$ one insertion gives $n=9$ with
+all $3$-sums $\le16$; the arrangement $(9,4,3,8,5,2,7,6,1)$ in the note is of this form, so $a(9)\le16$, and
+$a(9)\ge16$ by Remark~9. This is one of the four exceptions; it is consistent with Theorem~1(a), which needs
+$9>(3+3)\cdot3=18$ and does not apply.
+\item \emph{$m=k+2$}: no insertion; e.g.\ $(k,m)=(3,5)$ gives $n=15$ and $a(15)\le25$, with equality by Remark~9.
+\item \emph{$n=21$, $k=3$}: $g=3$ and $21>18=(k+3)g$, so Theorem~1(a) gives $\msum(21,3)\ge2$; also $m=7=k+4$ in
+Corollary~3. The upper bound $\msum(21,3)\le2$ comes from (AFG4) or from Schoenfield's arrangement. So $a(21)=35$
+by a complete argument, independently of the personal communication cited by HK.
+\item \emph{$n=2k$}: excluded in Theorem~1(b), and genuinely so, since $\msum(2k,k)=\frac12$ (AFG, Theorem~2). For
+$k=3$ this is $n=6$, one of the four exceptions; there $a(6)\ge\lceil21/2\rceil=11$ trivially and
+$(6,1,4,5,2,3)$ attains $11$.
+\item \emph{$n=4$, $k=3$}: each window omits one number, so every window sum is $10-\pi_i$ and $a(4)=10-1=9=f(4)$.
+\item \emph{$n=5$}: odd, $3\nmid5$, and $5\le6=(k+3)g$, so Theorem~1(a) does not apply; $(5,1,4,3,2)$ attains
+$10=f(5)-1$ and Remark~9 gives $a(5)\ge10$.
+\item \emph{Odd $n\ge7$ with $3\nmid n$}: Theorem~1(a) with $g=1$ applies as $n>6$. \emph{Odd multiples of $3$}:
+Theorem~1(a) with $g=3$ applies for $n>18$, i.e.\ $n\ge21$; the remaining ones, $n=9$ and $15$, are exceptions.
+\emph{Even $n\ge4$, $n\ne6$}: Theorem~1(b).
+\end{itemize}
+These cases are exhaustive for $n\ge4$, so Corollary~4 follows.
+
+\section{What the computations do and do not establish}
+
+They are evidence that the statements and the code agree, never a step of a proof.
+\begin{itemize}
+\item \emph{Two independent implementations of the lower-bound inequalities.} \texttt{tests/lemmas.c} (C) and the
+function \texttt{check} in \texttt{stress\_lemmas.py} (Python) were written separately from the definitions. The
+two Python stress scripts share \texttt{check}, so they are one implementation tested on different inputs, as the
+reviewer notes. \texttt{lemmas.c} covers every arrangement for $n\le11$ ($k=3,5$); \texttt{check} covers large and
+near-optimal arrangements.
+\item \emph{The construction} is checked by computing all window sums of the produced permutation directly; this does
+not reuse the array formulas of the proof.
+\item \emph{The exhaustive searches} (\texttt{clock\_bt3.c}, \texttt{kwin.c}) were tested against plain enumeration
+(\texttt{brute.c}) and reproduce all published terms $a(3),\dots,a(38)$.
+\end{itemize}
+\end{document}
