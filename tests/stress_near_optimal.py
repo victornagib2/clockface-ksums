@@ -7,7 +7,7 @@ import os; REPO = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..',
 sys.path.insert(0, REPO)
 from schoenfield import construct
 src = open(__file__.replace('stress_near_optimal.py', 'stress_lemmas.py')).read().split("rng = random.Random(2026)")[0]
-ns = {}; exec(src, ns); check = ns["check"]
+ns = {"__file__": __file__.replace("stress_near_optimal.py", "stress_lemmas.py")}; exec(src, ns); check = ns["check"]
 
 def anneal(n, k, rng, iters=60000):
     p = list(range(1, n + 1)); rng.shuffle(p)
