@@ -60,6 +60,11 @@ find arrangements, not rule them out).
 
 ## Version history
 
+- **1.2 (10 November 2026).** Theorem 2 and Corollary 3 now say explicitly that both k and m are odd (the
+  mathematics is unchanged). Added [paper/reviewer-companion.pdf](paper/reviewer-companion.pdf): a table of
+  hypotheses and logical dependencies, the construction proof with every index written out, and the boundary
+  cases. Added stress tests of the lower-bound inequalities on large and near-optimal arrangements
+  (`tests/stress_lemmas.py`, `tests/stress_near_optimal.py`, [results/stress_log.txt](results/stress_log.txt)).
 - **1.1 (6 November 2026).** Added the reference to Bogdanović, Maksimović, Simić and Milošević (2017), whose
   computation disc(35, 7) = 1 already gave msum(35, 7) = 1, so that case of Corollary 3 was known before; the note's
   introduction and abstract now say so. Added the logs of the lemma and construction checks. The theorems and proofs

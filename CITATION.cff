@@ -4,8 +4,8 @@ title: "Small maximal k-consecutive sums on a circle and the clock-face problem"
 authors:
   - family-names: "Nagib"
     given-names: "Victor Nidal Bassem"
-date-released: 2026-11-06
-version: "1.1.0"
+date-released: 2026-11-10
+version: "1.2.0"
 url: "https://github.com/victornagib2/clockface-ksums"
 repository-code: "https://github.com/victornagib2/clockface-ksums"
 license: MIT
